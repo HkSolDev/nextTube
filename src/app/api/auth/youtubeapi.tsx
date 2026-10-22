@@ -37,7 +37,7 @@ export interface YouTubeResponse {
 
 export const fetchYouTubeData = async (): Promise<YouTubeResponse> => {
     try {
-        const response = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=${process.env.NEXT_PUBLIC_API_KEY}`);
+        const response = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=${process.env.YOUTUBE_API_KEY}`);
         return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -51,7 +51,7 @@ export const fetchYouTubeData = async (): Promise<YouTubeResponse> => {
 
 export async function GetSearchData(searchTerm: string, videoId?: string): Promise<YouTubeResponse | null> {
     try {
-      const apiKey = process.env.NEXT_PUBLIC_API_KEY; 
+      const apiKey = process.env.YOUTUBE_API_KEY;
       const apiUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${encodeURIComponent(
         searchTerm
       )}&type=video${videoId ? `&videoCategoryId=${videoId}` : ''}&videoDuration=medium&key=${apiKey}`;
